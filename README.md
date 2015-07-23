@@ -1,6 +1,10 @@
 pyembedpg
 =========
 
+[![Build Status](https://travis-ci.org/Simulmedia/pyembedpg.svg)](https://travis-ci.org/Simulmedia/pyembedpg)
+[![Code Climate](https://codeclimate.com/github/Simulmedia/pyembedpg/badges/gpa.svg)](https://codeclimate.com/github/Simulmedia/pyembedpg)
+[![Test Coverage](https://codeclimate.com/github/Simulmedia/pyembedpg/badges/coverage.svg)](https://codeclimate.com/github/Simulmedia/pyembedpg/coverage)
+
 Provide a platform neutral way to run Postgres in unit tests.
 
 ### Why
