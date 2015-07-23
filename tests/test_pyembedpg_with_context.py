@@ -10,7 +10,8 @@ class TestPyEmbedPgWithContext(object):
     def test_get_remote_version(self):
         pg = PyEmbedPg('test')
         last_version = pg.get_latest_remote_version()
-        assert re.match('\d+\.\d+\.\d+', last_version)
+        # can be 9.5.alpha1
+        assert re.match('\d+\.[\w\.]+', last_version)
 
     def test_simple_run(self):
         pg = PyEmbedPg('9.4.0')
