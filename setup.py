@@ -26,7 +26,7 @@ setup(
     version='0.0.1',
     description='Run embedded version of Postgres',
     long_description='Run embedded version of Postgres',
-    keywords='',
+    keywords='postgres, python, tests',
     license='Apache License 2.0',
     author='Simulmedia',
     author_email='francois@simulmedia.com',
