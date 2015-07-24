@@ -47,8 +47,7 @@ setup(
     ],
     install_requires=[
         'requests==2.7.0',
-        'psycopg2==2.6',
-        'natsort==4.0.0'
+        'psycopg2==2.6'
     ],
     tests_require=[
         'pytest'

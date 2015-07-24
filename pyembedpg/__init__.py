@@ -11,7 +11,6 @@ import tarfile
 import shutil
 import psycopg2
 import time
-from natsort import natsorted
 from subprocess import Popen
 
 
@@ -57,7 +56,27 @@ class PyEmbedPg(object):
         :return: latest version installed locally in the cache and None if there is nothing downloaded
         """
 
-        return natsorted(os.listdir(self._cache_dir))[0] if os.path.exists(self._cache_dir) else None
+        if os.path.exists(self._cache_dir):
+            return None
+
+        tags = os.listdir(self._cache_dir)
+        # we want to sort based on numbers so:
+        # v3.0.0-QA6
+        # v3.0.0-QA15
+        # v3.0.0-QA2
+        # are sorted according to the numbers so no lexigraphically
+        revs_to_tag = [(re.split("[^\d]+", tag), tag) for tag in tags]
+
+        def sort_versions(tuple1, tuple2):
+            if tuple1[0] < tuple2[0]:
+                return -1
+            elif tuple1[0] > tuple2[0]:
+                return 1
+            else:
+                return 0
+
+        revs_to_tag.sort(sort_versions)
+        return revs_to_tag[-1][1]
 
     def get_latest_remote_version(self):
         """
