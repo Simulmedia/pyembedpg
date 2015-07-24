@@ -1,3 +1,4 @@
+from contextlib import closing
 from distutils import spawn
 import logging
 import os
@@ -115,7 +116,8 @@ class PyEmbedPg(object):
             temp_dir = tempfile.mkdtemp()
             source_dir = os.path.join(temp_dir, 'postgresql-{version}'.format(version=self.version))
             try:
-                with tarfile.open(fd.name) as tar:
+                # Can't use with context directly because of python 2.6
+                with closing(tarfile.open(fd.name)) as tar:
                     tar.extractall(temp_dir)
                 os.system('sh -c "cd {path} && ./configure --prefix={target_dir} && make install"'.format(path=source_dir, target_dir=self._version_path))
             finally:
