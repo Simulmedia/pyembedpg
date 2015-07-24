@@ -85,7 +85,7 @@ class PyEmbedPg(object):
         :return: latest version installed locally on the Postgres FTP server
         """
         response = requests.get(PyEmbedPg.DOWNLOAD_BASE_URL)
-        last_version_match = list(re.finditer('>v(?P<version>[^<]+)<', response.content))[-1]
+        last_version_match = list(re.finditer('>v(?P<version>[^<]+)<', response.content.decode()))[-1]
         return last_version_match.group('version')
 
     def check_version_present(self):
