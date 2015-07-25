@@ -2,8 +2,8 @@ pyembedpg
 =========
 
 [![Build Status](https://travis-ci.org/Simulmedia/pyembedpg.svg)](https://travis-ci.org/Simulmedia/pyembedpg)
-[![Code Climate](https://codeclimate.com/github/Simulmedia/pyembedpg/badges/gpa.svg)](https://codeclimate.com/github/Simulmedia/pyembedpg)
-[![Test Coverage](https://codeclimate.com/github/Simulmedia/pyembedpg/badges/coverage.svg)](https://codeclimate.com/github/Simulmedia/pyembedpg/coverage)
+[![Codacy Badge](https://www.codacy.com/project/badge/391726fcad274a24b1427abf5fa10380)](https://www.codacy.com/app/francois-dangngoc/pyembedpg)
+[![Coverage Status](https://coveralls.io/repos/simulmedia/pyembedpg/badge.svg?branch=master&service=github)](https://coveralls.io/github/simulmedia/pyembedpg?branch=master)
 
 Provide a platform neutral way to run Postgres in unit tests.
 
