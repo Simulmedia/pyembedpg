@@ -42,9 +42,6 @@ setup(
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
     ],
-    packages=[
-        'pyembedpg',
-    ],
     install_requires=[
         'requests==2.7.0',
         'psycopg2==2.6'
