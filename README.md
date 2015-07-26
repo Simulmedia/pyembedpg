@@ -1,7 +1,11 @@
 pyembedpg
 =========
 
+[![pypi](http://img.shields.io/pypi/v/pyembedpg.png)](https://pypi.python.org/pypi/pyembedpg)
+[![Supported Python Versions](https://pypip.in/py_versions/pyembedpg/badge.svg)](https://pypi.python.org/pypi/pyembedpg/)
+[![pypi downloads](http://img.shields.io/pypi/dm/pyembedpg.png)](https://pypi.python.org/pypi/pyembedpg)
 [![Build Status](https://travis-ci.org/Simulmedia/pyembedpg.svg)](https://travis-ci.org/Simulmedia/pyembedpg)
+[![License](https://pypip.in/license/pyembedpg/badge.svg)](https://pypi.python.org/pypi/pyembedpg/)
 [![Codacy Badge](https://www.codacy.com/project/badge/391726fcad274a24b1427abf5fa10380)](https://www.codacy.com/app/francois-dangngoc/pyembedpg)
 [![Coverage Status](https://coveralls.io/repos/simulmedia/pyembedpg/badge.svg?branch=master&service=github)](https://coveralls.io/github/simulmedia/pyembedpg?branch=master)
 
@@ -9,9 +13,10 @@ Provide a platform neutral way to run Postgres in unit tests.
 
 ### Why
 
-- Dropping databases and users all the time is painful (and cleanup might not be done properly everytime)
-- Easier to install a particular version than manually
+- Running tests in parallel on different instances of Postgres
 - Testing on different versions can be useful (e.g., prod has another version of Postgres installed)
+- Easier to install a particular version than manually
+- Dropping databases and users all the time is painful (and cleanup might not be done properly everytime)
 
 ### Features
 
