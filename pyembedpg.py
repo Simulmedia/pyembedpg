@@ -57,7 +57,7 @@ class PyEmbedPg(object):
         :return: latest version installed locally in the cache and None if there is nothing downloaded
         """
 
-        if os.path.exists(self._cache_dir):
+        if not os.path.exists(self._cache_dir):
             return None
 
         tags = os.listdir(self._cache_dir)

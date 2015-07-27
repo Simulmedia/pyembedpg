@@ -6,7 +6,8 @@ from pyembedpg import PyEmbedPg
 class TestPyEmbedPg(unittest.TestCase):
     def setUp(self):
         self.port = 15433
-        self.postgres = PyEmbedPg('9.4.0').start(self.port)
+        self.embedpg = PyEmbedPg('9.4.0')
+        self.postgres = self.embedpg.start(self.port)
         self.postgres.create_user('scott', 'tiger')
         self.postgres.create_database('testdb', 'scott')
 
@@ -19,6 +20,9 @@ class TestPyEmbedPg(unittest.TestCase):
                 cursor.execute("INSERT INTO employee VALUES ('Mary', 22)")
                 cursor.execute('SELECT * FROM employee ORDER BY age')
                 assert cursor.fetchall() == [('Mary', 22), ('John', 32)]
+
+        # Test that the version is installed locally
+        assert self.embedpg.get_latest_local_version() is not None
 
     def tearDown(self):
         self.postgres.shutdown()

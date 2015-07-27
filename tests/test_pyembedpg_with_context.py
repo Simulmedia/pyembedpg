@@ -27,3 +27,6 @@ class TestPyEmbedPgWithContext(object):
                     cursor.execute("INSERT INTO employee VALUES ('Mary', 22)")
                     cursor.execute('SELECT * FROM employee ORDER BY age')
                     assert cursor.fetchall() == [('Mary', 22), ('John', 32)]
+
+        # Test that the version is installed locally
+        assert pg.get_latest_local_version() is not None
