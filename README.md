@@ -2,10 +2,10 @@ pyembedpg
 =========
 
 [![pypi](http://img.shields.io/pypi/v/pyembedpg.png)](https://pypi.python.org/pypi/pyembedpg)
-[![Supported Python Versions](https://pypip.in/py_versions/pyembedpg/badge.svg)](https://pypi.python.org/pypi/pyembedpg/)
+[![Supported Python Versions](https://img.shields.io/pypi/pyversions/Pyembedpg.svg)](https://pypi.python.org/pypi/pyembedpg/)
 [![pypi downloads](http://img.shields.io/pypi/dm/pyembedpg.png)](https://pypi.python.org/pypi/pyembedpg)
 [![Build Status](https://travis-ci.org/Simulmedia/pyembedpg.svg)](https://travis-ci.org/Simulmedia/pyembedpg)
-[![License](https://pypip.in/license/pyembedpg/badge.svg)](https://pypi.python.org/pypi/pyembedpg/)
+[![License](https://img.shields.io/pypi/l/Pyembedpg.svg)](https://pypi.python.org/pypi/pyembedpg/)
 [![Codacy Badge](https://www.codacy.com/project/badge/391726fcad274a24b1427abf5fa10380)](https://www.codacy.com/app/francois-dangngoc/pyembedpg)
 [![Coverage Status](https://coveralls.io/repos/Simulmedia/pyembedpg/badge.svg?branch=master&service=github)](https://coveralls.io/github/Simulmedia/pyembedpg?branch=master)
 
