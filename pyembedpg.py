@@ -76,7 +76,7 @@ class PyEmbedPg(object):
             else:
                 return 0
 
-        revs_to_tag.sort(sort_versions)
+        revs_to_tag.sort(key=sort_versions)
         return revs_to_tag[-1][1]
 
     def get_latest_remote_version(self):
