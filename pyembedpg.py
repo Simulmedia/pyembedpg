@@ -67,17 +67,7 @@ class PyEmbedPg(object):
         # v3.0.0-QA2
         # are sorted according to the numbers so no lexigraphically
         revs_to_tag = [(re.split("[^\d]+", tag), tag) for tag in tags]
-
-        def sort_versions(tuple1, tuple2):
-            if tuple1[0] < tuple2[0]:
-                return -1
-            elif tuple1[0] > tuple2[0]:
-                return 1
-            else:
-                return 0
-
-        sorted(revs_to_tag, cmp=sort_versions)
-        return revs_to_tag[-1][1]
+        return max(revs_to_tag)[1]
 
     def get_latest_remote_version(self):
         """
