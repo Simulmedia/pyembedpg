@@ -27,6 +27,10 @@ You can start the Postgres server on any port in a context (using `with`) that w
 
 ### How to use it
 
+You can install pyembedpg with pip:
+
+	pip install pyembedpg
+
 You can start a new postgres server as follows:
 ```python
     pg = PyEmbedPg('9.4.0')
