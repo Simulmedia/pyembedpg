@@ -232,11 +232,11 @@ class DatabaseRunner(object):
         """
         # stop pg
         try:
-            logger.info('Killing postgres on port {port}'.format(port=self.running_port))
+            logger.debug('Killing postgres on port {port}'.format(port=self.running_port))
             self.proc.kill()
             os.waitpid(self.proc.pid, 0)
         finally:
-            logger.info('Removing postgres data dir on {dir}'.format(dir=self._temp_dir))
+            logger.debug('Removing postgres data dir on {dir}'.format(dir=self._temp_dir))
             # remove data directory
             shutil.rmtree(self._temp_dir, ignore_errors=True)
 
