@@ -9,7 +9,7 @@ pyembedpg
 [![Codacy Badge](https://www.codacy.com/project/badge/391726fcad274a24b1427abf5fa10380)](https://www.codacy.com/app/francois-dangngoc/pyembedpg)
 [![Coverage Status](https://coveralls.io/repos/Simulmedia/pyembedpg/badge.svg?branch=master&service=github)](https://coveralls.io/github/Simulmedia/pyembedpg?branch=master)
 
-Provide a platform neutral way to run Postgres in integration tests.
+Provide a platform neutral way to run Postgres in integration tests. More info at: http://www.simulmedia.com/resources/blog/pyembedpg-simple-way-use-postgres-python-integration-tests/
 
 ### Why
 
