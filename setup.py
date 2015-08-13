@@ -40,7 +40,7 @@ class PyTestCommand(TestCommand):
 
 setup(
     name='pyembedpg',
-    version='0.0.2',
+    version='0.0.3',
     description='Run embedded version of Postgres',
     long_description='Run embedded version of Postgres',
     keywords='postgres, python, tests',

@@ -20,6 +20,7 @@ import logging
 import os
 from os.path import expanduser
 import re
+import socket
 import tempfile
 from psycopg2._psycopg import OperationalError
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
@@ -172,14 +173,16 @@ class DatabaseRunner(object):
                 'host    all             all             ::1/128                 md5\n'.format(admin=DatabaseRunner.ADMIN_USER)
             )
 
-        for port in ports:
-            self.proc = Popen([self._postgres_cmd, '-D', self._temp_dir, '-p', str(port)])
-            # if the process is still running, then there was problem, most likely the port is taken so try the next one
-            if not self.proc.poll():
-                self.running_port = port
-                break
-        else:
+        def can_connect(port):
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            return sock.connect_ex(('127.0.0.1', port)) != 0
+
+        self.running_port = next((port for port in ports if can_connect(port)), None)
+        if self.running_port is None:
             raise PyEmbedPgException('Cannot run postgres on any of these ports [{ports}]'.format(ports=', '.join((str(p) for p in ports))))
+
+        self.proc = Popen([self._postgres_cmd, '-D', self._temp_dir, '-p', str(self.running_port)])
+        logger.debug('Postgres started on port {port}...'.format(port=self.running_port))
 
         # Loop until the server is started
         logger.debug('Waiting for Postgres to start...')
@@ -193,8 +196,6 @@ class DatabaseRunner(object):
             time.sleep(0.1)
         else:
             raise PyEmbedPgException('Cannot start postgres after {timeout} seconds'.format(timeout=DatabaseRunner.TIMEOUT))
-
-        logger.debug('Postgres started on port {port}...'.format(port=self.running_port))
 
     def __enter__(self):
         return self
