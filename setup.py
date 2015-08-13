@@ -40,7 +40,7 @@ class PyTestCommand(TestCommand):
 
 setup(
     name='pyembedpg',
-    version='0.0.1',
+    version='0.0.2',
     description='Run embedded version of Postgres',
     long_description='Run embedded version of Postgres',
     keywords='postgres, python, tests',
@@ -48,6 +48,7 @@ setup(
     author='Simulmedia',
     author_email='francois@simulmedia.com',
     url='http://github.com/simulmedia/pyembedpg/',
+    packages=[''],
     classifiers=[
         'License :: OSI Approved :: Apache Software License',
         'Topic :: Software Development :: Libraries :: Python Modules',
