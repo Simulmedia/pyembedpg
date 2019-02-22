@@ -40,7 +40,7 @@ class PyTestCommand(TestCommand):
 
 setup(
     name='pyembedpg',
-    version='0.0.3',
+    version='0.0.4',
     description='Run embedded version of Postgres',
     long_description='Run embedded version of Postgres',
     keywords='postgres, python, tests',
@@ -59,10 +59,12 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
     ],
     install_requires=[
-        'requests==2.7.0',
-        'psycopg2==2.6'
+        'requests',
+        'psycopg2'
     ],
     tests_require=[
         'pytest'
