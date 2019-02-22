@@ -61,7 +61,7 @@ with pg.start(15432) as postgres:
     postgres.create_database('testdb', 'scott')
 
     # Postgres is initialized, now run some queries
-    with psycopg2.connect(database='postgres', user='scott', password='tiger', port=self.postgres.running_port) as conn:
+    with psycopg2.connect(database='postgres', user='scott', password='tiger', port=postgres.running_port) as conn:
         with conn.cursor() as cursor:
             cursor.execute('CREATE TABLE employee(name VARCHAR(32), age INT)')
             cursor.execute("INSERT INTO employee VALUES ('John', 32)")
