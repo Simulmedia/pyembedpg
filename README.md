@@ -110,3 +110,6 @@ Check that gcc and readline (e.g., libreadline-dev on Debian, readline on MacOS)
 Alternatively, there is another project [testing.postgres](https://github.com/tk0miya/testing.postgresql) that allows to use the current Postgres application
 installed on the server and initialize a new instance.
 
+### Contributors
+
+* Lukmanul Hakim [@kimkimkeren](https://github.com/kimkimkeren)

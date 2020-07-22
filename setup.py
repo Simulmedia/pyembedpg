@@ -40,7 +40,7 @@ class PyTestCommand(TestCommand):
 
 setup(
     name='pyembedpg',
-    version='0.0.4',
+    version='0.0.5',
     description='Run embedded version of Postgres',
     long_description='Run embedded version of Postgres',
     keywords='postgres, python, tests',
@@ -53,9 +53,6 @@ setup(
         'License :: OSI Approved :: Apache Software License',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
