@@ -14,23 +14,23 @@
 # limitations under the License.
 #
 
-from contextlib import closing
-from distutils import spawn
 import logging
 import os
-from os.path import expanduser
 import re
-import socket
-import tempfile
-from psycopg2._psycopg import OperationalError
-from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-import requests
-import tarfile
 import shutil
-import psycopg2
+import socket
+import tarfile
+import tempfile
 import time
+from contextlib import closing
+from distutils import spawn
+from os.path import expanduser
 from subprocess import Popen
 
+import psycopg2
+import requests
+from psycopg2._psycopg import OperationalError
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 logger = logging.getLogger('pyembedpg')
 
@@ -83,7 +83,7 @@ class PyEmbedPg(object):
         # v3.0.0-QA15
         # v3.0.0-QA2
         # are sorted according to the numbers so no lexigraphically
-        revs_to_tag = [(re.split("[^\d]+", tag), tag) for tag in tags]
+        revs_to_tag = [(re.split(r"[^\d]+", tag), tag) for tag in tags]
         return max(revs_to_tag)[1]
 
     def get_latest_remote_version(self):
@@ -126,7 +126,11 @@ class PyEmbedPg(object):
                 # Can't use with context directly because of python 2.6
                 with closing(tarfile.open(fd.name)) as tar:
                     tar.extractall(temp_dir)
-                os.system('sh -c "cd {path} && ./configure --prefix={target_dir} && make install && cd contrib && make install"'.format(path=source_dir, target_dir=self._version_path))
+                os.system(
+                    'sh -c "cd {path} && ./configure --prefix={target_dir} && make install && cd contrib && make install"'.format(
+                        path=source_dir,
+                        target_dir=self._version_path)
+                )
             finally:
                 shutil.rmtree(temp_dir, ignore_errors=True)
 

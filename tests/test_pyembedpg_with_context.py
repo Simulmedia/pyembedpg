@@ -15,7 +15,9 @@
 #
 
 import re
+
 import psycopg2
+
 from pyembedpg import PyEmbedPg
 
 
@@ -27,7 +29,7 @@ class TestPyEmbedPgWithContext(object):
         pg = PyEmbedPg('test')
         last_version = pg.get_latest_remote_version()
         # can be 9.5.alpha1
-        assert re.match('\d+\.[\w\.]+', last_version)
+        assert re.match(r'\d+\.[\w\.]+', last_version)
 
     def test_simple_run(self):
         pg = PyEmbedPg('9.4.0')

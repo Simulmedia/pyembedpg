@@ -17,6 +17,7 @@
 #
 
 import sys
+
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
 
@@ -37,6 +38,7 @@ class PyTestCommand(TestCommand):
         import pytest
         errno = pytest.main(self.pytest_args)
         sys.exit(errno)
+
 
 setup(
     name='pyembedpg',

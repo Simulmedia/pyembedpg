@@ -15,7 +15,9 @@
 #
 
 import unittest
+
 import psycopg2
+
 from pyembedpg import PyEmbedPg
 
 
