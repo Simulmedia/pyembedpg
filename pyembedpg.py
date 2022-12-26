@@ -48,10 +48,13 @@ class PyEmbedPg(object):
         Initialize a new Postgres object
         :param version: version to use. If it is not set, use the latest version in .pyembedpg directory. If not present
                         use the latest version remotely. Use 'local' to use the local postgres version installed on the machine
+        :param cache_base_dir: base directory path to save the cache files. If not present, the home directory is used.
         :return:
         """
-        home_dir = expanduser("~")
-        self._cache_dir = os.path.join(home_dir, PyEmbedPg.CACHE_DIRECTORY)
+        if not cache_base_dir:
+            cache_base_dir = expanduser("~")
+
+        self._cache_dir = os.path.join(cache_base_dir, PyEmbedPg.CACHE_DIRECTORY)
 
         # if version is not specified, check local last version otherwise get last remote version
         self.version = version
