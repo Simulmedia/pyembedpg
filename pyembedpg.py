@@ -43,11 +43,13 @@ class PyEmbedPg(object):
 
     CACHE_DIRECTORY = '.pyembedpg'
 
-    def __init__(self, version=None):
+    def __init__(self, version=None, stdout=None, stderr=None):
         """
         Initialize a new Postgres object
         :param version: version to use. If it is not set, use the latest version in .pyembedpg directory. If not present
                         use the latest version remotely. Use 'local' to use the local postgres version installed on the machine
+        :param stdout: stdout argument of subprocess module. Use subprocess.DEVNULL to supress stdout of the subprocess.
+        :param stderr: stderr argument of subprocess module. Use subprocess.DEVNULL to supress stderr of the subprocess.
         :return:
         """
         home_dir = expanduser("~")
@@ -67,6 +69,9 @@ class PyEmbedPg(object):
             self._version_path = os.path.dirname(full_path)
         else:
             self._version_path = os.path.join(self._cache_dir, self.version)
+
+        self._stdout = stdout
+        self._stderr = stderr
 
     def get_latest_local_version(self):
         """
@@ -126,10 +131,11 @@ class PyEmbedPg(object):
                 # Can't use with context directly because of python 2.6
                 with closing(tarfile.open(fd.name)) as tar:
                     tar.extractall(temp_dir)
-                os.system(
-                    'sh -c "cd {path} && ./configure --prefix={target_dir} && make install && cd contrib && make install"'.format(
-                        path=source_dir,
-                        target_dir=self._version_path)
+                subprocess.call(
+                    'sh -c "cd {path} && ./configure --prefix={target_dir} && make install && cd contrib && make install"'.format(path=source_dir, target_dir=self._version_path),
+                    shell=True,
+                    stdout=self._stdout,
+                    stderr=self._stderr
                 )
             finally:
                 shutil.rmtree(temp_dir, ignore_errors=True)
@@ -145,23 +151,25 @@ class PyEmbedPg(object):
 
         bin_dir = os.path.join(self._version_path, 'bin')
         ports = [port] if isinstance(port, int) else port
-        return DatabaseRunner(bin_dir, ports)
+        return DatabaseRunner(bin_dir, ports, self._stdout, self._stderr)
 
 
 class DatabaseRunner(object):
     ADMIN_USER = 'root'
     TIMEOUT = 10
 
-    def __init__(self, bin_dir, ports):
+    def __init__(self, bin_dir, ports, stdout, stderr):
         self._ports = ports
         self._postgres_cmd = os.path.join(bin_dir, 'postgres')
+        self._stdout = stdout
+        self._stderr = stderr
 
         # init db
         init_db = os.path.join(bin_dir, 'initdb')
         self._temp_dir = tempfile.mkdtemp()
-        command = init_db + ' -D ' + self._temp_dir + ' -U ' + DatabaseRunner.ADMIN_USER
-        logger.debug('Running command: {command}'.format(command=command))
-        os.system(command)
+        command = [init_db, '-D', self._temp_dir, '-U', DatabaseRunner.ADMIN_USER]
+        logger.debug('Running command: {command}'.format(command=' '.join(command)))
+        subprocess.call(command, stdout=self._stdout, stderr=self._stderr)
 
         # overwrite pg_hba.conf to only allow local access with password authentication
         with open(os.path.join(self._temp_dir, 'pg_hba.conf'), 'w') as fd:
@@ -185,7 +193,11 @@ class DatabaseRunner(object):
         if self.running_port is None:
             raise PyEmbedPgException('Cannot run postgres on any of these ports [{ports}]'.format(ports=', '.join((str(p) for p in ports))))
 
-        self.proc = Popen([self._postgres_cmd, '-D', self._temp_dir, '-p', str(self.running_port)])
+        self.proc = Popen(
+            [self._postgres_cmd, '-D', self._temp_dir, '-p', str(self.running_port)],
+            stdout=self._stdout,
+            stderr=self._stderr
+        )
         logger.debug('Postgres started on port {port}...'.format(port=self.running_port))
 
         # Loop until the server is started
